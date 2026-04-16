@@ -1,0 +1,32 @@
+name: FB Auto Bot
+on:
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: |
+          pip install playwright
+          playwright install chromium
+      - name: Run Bot
+        env:
+          FB_EMAIL_1: ${{ secrets.FB_EMAIL_1 }}
+          FB_PASS_1: ${{ secrets.FB_PASS_1 }}
+          FB_EMAIL_2: ${{ secrets.FB_EMAIL_2 }}
+          FB_PASS_2: ${{ secrets.FB_PASS_2 }}
+          FB_EMAIL_3: ${{ secrets.FB_EMAIL_3 }}
+          FB_PASS_3: ${{ secrets.FB_PASS_3 }}
+          FB_EMAIL_4: ${{ secrets.FB_EMAIL_4 }}
+          FB_PASS_4: ${{ secrets.FB_PASS_4 }}
+          FB_EMAIL_5: ${{ secrets.FB_EMAIL_5 }}
+          FB_PASS_5: ${{ secrets.FB_PASS_5 }}
+        run: python bot.py
+        
